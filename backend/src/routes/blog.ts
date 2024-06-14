@@ -16,7 +16,7 @@ export const blogRoutes = new Hono<{
 
 blogRoutes.use("/*", async (c, next) => {
   const header = c.req.header("Authorization") || "";
-  const token = header.split(" ")[1];
+  const token = header;
   const response = await verify(token, c.env.JWT_SECRET);
   if (response.id) {
     c.set("userId", String(response.id));
@@ -97,7 +97,18 @@ blogRoutes.get("/bulk", async (c) => {
   });
 
   try {
-    const blogs = await prisma.post.findMany();
+    const blogs = await prisma.post.findMany({
+      select: {
+        id: true,
+        content: true,
+        title: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     return c.json({ blogs });
   } catch (error) {
     console.error("Error fetching blogs:", error);
@@ -116,6 +127,16 @@ blogRoutes.get("/:id", async (c) => {
     const blog = await prisma.post.findUnique({
       where: {
         id: id,
+      },
+      select: {
+        id: true,
+        content: true,
+        title: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
