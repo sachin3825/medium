@@ -7,7 +7,7 @@ export interface Blog {
   title: string;
   id: number;
   author: {
-    name: string;
+    name: string | null;
   };
 }
 
@@ -30,10 +30,12 @@ export const useBlogs = () => {
 
   return { loading, blogs };
 };
+
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
-  const [blog, setBlog] = useState<Blog[]>([]);
+  const [blog, setBlog] = useState<Blog | any>(null);
 
+  console.log("blog", blog);
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/blog/${id}`, {
@@ -45,7 +47,7 @@ export const useBlog = ({ id }: { id: string }) => {
         setBlog(response.data.blog);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return { loading, blog };
 };

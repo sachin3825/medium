@@ -43,8 +43,9 @@ blogRoutes.post("/", async (c) => {
   }
 
   const authorId = c.get("userId");
+
   try {
-    await prisma.post.create({
+    const post = await prisma.post.create({
       data: {
         title: body.title,
         content: body.content,
@@ -52,7 +53,7 @@ blogRoutes.post("/", async (c) => {
       },
     });
 
-    return c.json({ message: "post created" });
+    return c.json({ message: "post created", post });
   } catch (error) {
     c.status(500);
     return c.json({ message: "failed to created" });

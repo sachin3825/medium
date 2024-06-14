@@ -44,31 +44,31 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
       const jwt = response.data;
       localStorage.setItem("token", jwt.jwt);
-      navigate("/blog/1");
+      navigate("/blogs");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className='h-screen flex justify-center items-center flex-col gap-2'>
-      <div className='flex justify-center flex-col gap-5'>
+    <div className="h-screen flex justify-center items-center flex-col gap-2">
+      <div className="flex justify-center flex-col gap-5">
         <div>
-          <h1 className='text-3xl font-bold text-center'>
+          <h1 className="text-3xl font-bold text-center">
             {type === "signup" ? "Create an account" : "Login to account"}
           </h1>
-          <p className='text-center text-gray-500 font-sm text-sm mt-1'>
+          <p className="text-center text-gray-500 font-sm text-sm mt-1">
             {type === "signup" ? (
               <>
                 Already have an account?{" "}
-                <NavLink className='underline' to='/signin'>
+                <NavLink className="underline" to="/signin">
                   Login
                 </NavLink>
               </>
             ) : (
               <>
                 Don't have an account?{" "}
-                <NavLink className='underline' to='/signup'>
+                <NavLink className="underline" to="/signup">
                   Sign Up
                 </NavLink>
               </>
@@ -76,37 +76,37 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
           </p>
         </div>
 
-        <div className='flex flex-col gap-4'>
+        <div className="flex flex-col gap-4 items-center justify-center">
           {type === "signup" && (
             <LabelledInput
-              label='Name'
-              placeholder='Enter your name'
+              label="Name"
+              placeholder="Enter your name"
               onChange={handleSignupChange}
-              id='name'
+              id="name"
             />
           )}
           <LabelledInput
-            label='Email'
-            placeholder='Enter your email'
+            label="Email"
+            placeholder="Enter your email"
             onChange={
               type === "signup" ? handleSignupChange : handleSigninChange
             }
-            id='email'
+            id="email"
           />
           <LabelledInput
-            label='Password'
-            placeholder='Enter your password'
+            label="Password"
+            placeholder="Enter your password"
             onChange={
               type === "signup" ? handleSignupChange : handleSigninChange
             }
-            id='password'
-            type='password'
+            id="password"
+            type="password"
           />
         </div>
 
         <button
-          type='button'
-          className='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+          type="button"
+          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 self-center w-full m-0"
           onClick={onSubmit}
         >
           {type === "signup" ? "Signup" : "Sign In"}
@@ -132,17 +132,17 @@ function LabelledInput({
   type,
 }: LabelledInputTypes) {
   return (
-    <div className='max-w-sm w-full'>
+    <div className="max-w-sm w-full">
       <label
         htmlFor={id}
-        className='block mb-2 text-sm font-medium text-gray-900 light:text-white'
+        className="block mb-2 text-sm font-medium text-gray-900 light:text-white"
       >
         {label}
       </label>
       <input
         type={type || "text"}
         id={id}
-        className='bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500'
+        className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500 m-0"
         placeholder={placeholder}
         onChange={onChange}
       />
